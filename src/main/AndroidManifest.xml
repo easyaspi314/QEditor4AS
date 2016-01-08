@@ -2,8 +2,269 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hipipal.texteditor"
     android:installLocation="auto"
-    android:versionCode="16"
-    android:versionName="1.4.1" >
+    android:versionCode="17"
+    android:versionName="1.4.2" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="16" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:icon="@drawable/micon_editor"
+        android:label="@string/app_label"
+        android:theme="@style/Theme.GDCatalog"
+        android:name=".MNApp" >
+        
+        <activity android:name=".MTubebook" android:label="@string/app_name" android:screenOrientation="user" android:configChanges="orientation|keyboardHidden"/>                
+
+        <activity
+        	android:theme="@style/Theme.GDCatalog"
+            android:name=".TedActivity"
+			android:screenOrientation="user"             
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|fontScale|screenSize|smallestScreenSize"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="com.hipipal.texteditor.ACTION_TED_BOX_OPEN" />
+                <action android:name="com.hipipal.texteditor.ACTION_TED_WIDGET_OPEN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/*" />
+            </intent-filter>
+
+            <!-- File not recognized as Text Files by Android -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="com.hipipal.texteditor.ACTION_TED_WIDGET_OPEN" />
+
+                <category android:name="android.intent.category.DEFAULT" />      
+                                                
+                 <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.js"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.htm"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.html"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.md"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.xhtml"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.php"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.ini"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.sh"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.log"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.db"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.conf"
+                    android:scheme="file" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*\\.cfg"
+                    android:scheme="file" />
+                  <data
+                    android:host="*"
+                    android:pathPattern=".*\\.c"
+                    android:scheme="file" />
+            </intent-filter>
+        </activity>
+
+        <activity
+        	android:theme="@style/Theme.GDCatalog"
+            android:name=".TedLocalActivity"
+            android:label="@string/title_settings"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="user">
+        </activity>
+        
+        <!-- Ted settings activity -->
+        <activity
+            android:name=".TedSettingsActivity"
+            android:label="@string/title_settings"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/Theme.GDCatalog"
+             >
+        </activity>
+
+        <!-- Ted save as activity -->
+        <activity
+          	android:theme="@style/Theme.GDCatalog"
+            android:name=".TedSaveAsActivity"
+            android:label="@string/title_save_as"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+
+        <!-- Ted open activity -->
+        <activity
+            android:name=".TedOpenActivity"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+
+        <!-- Ted open recent activity -->
+        <activity
+            android:name=".TedOpenRecentActivity"
+            android:label="@string/title_open_recent"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+
+        <!-- Ted Select font activity -->
+        <activity
+            android:name=".TedFontActivity"
+            android:label="@string/title_font"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+
+        <!-- Ted about activity -->
+        <activity
+            android:name=".TedAboutActivity"
+            android:label="@string/title_about"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        
+        <!-- Ted Run Rules activity -->
+        <activity
+            android:name=".RunRules"
+            android:label="Run Rules"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+
+        <!-- Ted Configure widget activity -->
+        <activity
+            android:name="com.hipipal.texteditor.TedWidgetConfigActivity"
+            android:exported="true"
+            android:permission="com.hipipal.texteditor.permission.TED_INTERNAL" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
 
 
+        <activity android:name=".MSettingAct" android:label="@string/app_name" android:screenOrientation="user" android:configChanges="orientation|keyboardHidden"/>                
+        <activity android:name=".MFTPSettingAct" android:label="@string/app_name" android:screenOrientation="user" android:configChanges="orientation|keyboardHidden"/>                
+
+        <activity android:name=".OFeedBackAct" android:label="@string/app_name" android:screenOrientation="user" android:configChanges="orientation|keyboardHidden"/>                
+        <activity android:name=".OAboutAct" android:label="@string/app_name" android:screenOrientation="user" android:configChanges="orientation|keyboardHidden"/>
+
+        <service android:name=".FTPServerService" />
+
+        <!-- Widget Receiver -->
+        <receiver
+            android:name="com.hipipal.texteditor.TedAppWidgetProvider"
+            android:permission="com.hipipal.texteditor.permission.TED_INTERNAL" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ted_widget" />
+        </receiver>
+        
+        
+        <activity android:name="jackpal.androidterm.Term"
+        		android:exported="true"
+                android:theme="@style/Theme"
+                android:launchMode="singleTask"
+                android:label="@string/console_name"
+                android:icon="@drawable/ic_arrow_back_white"
+                android:configChanges="keyboard|keyboardHidden|orientation"
+                android:windowSoftInputMode="adjustResize|stateAlwaysVisible">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias android:name="jackpal.androidterm.TermInternal"
+                android:targetActivity="jackpal.androidterm.Term"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="jackpal.androidterm.private.OPEN_NEW_WINDOW" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="jackpal.androidterm.private.SWITCH_WINDOW" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:name="jackpal.androidterm.RemoteInterface"
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="jackpal.androidterm.OPEN_NEW_WINDOW" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:name="jackpal.androidterm.RunScript"
+                android:targetActivity="jackpal.androidterm.RemoteInterface"
+                android:permission="jackpal.androidterm.permission.RUN_SCRIPT">
+            <intent-filter>
+                <action android:name="jackpal.androidterm.RUN_SCRIPT" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:name="jackpal.androidterm.TermPreferences"
+                android:label="@string/preferences" />
+        <activity android:name="jackpal.androidterm.WindowList"
+                android:label="@string/window_list" />
+        <service android:name="jackpal.androidterm.TermService" />   
+        
+        <!--uses-library android:required="false" android:name="com.sec.android.app.multiwindow" />
+        <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
+        <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" android:resource="@dimen/app_defaultsize_w" />
+		<meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:resource="@dimen/app_defaultsize_h" />
+		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" />
+		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" /-->     
+        
+        <!--meta-data android:name="com.google.android.gms.version" 
+            android:value="@integer/google_play_services_version" /-->
+            	
+    	<!--activity android:name="com.google.android.gms.ads.AdActivity"
+              android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/-->
+
+    </application>
 </manifest>

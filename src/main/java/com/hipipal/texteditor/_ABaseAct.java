@@ -28,6 +28,7 @@ import com.zuowuxuxi.base._WBase;
 import com.zuowuxuxi.common.GDBase;
 import com.zuowuxuxi.util.NAction;
 import com.zuowuxuxi.util.NUtil;
+import com.hipipal.texteditor.R;
 
 public class _ABaseAct extends GDBase {
     protected static final int SCRIPT_EXEC_PY = 2235;  
@@ -390,8 +391,6 @@ public class _ABaseAct extends GDBase {
 		return null;
 	}
 	
-    @SuppressWarnings("deprecation")
-	@SuppressLint("DefaultLocale")
 	public void playFromRemote(String link) {
     	String code = NAction.getCode(getApplicationContext());
         if (code.startsWith("mn")) {

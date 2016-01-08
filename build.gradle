@@ -1,11 +1,12 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 20
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        minSdkVersion 7
+        applicationId "com.hipipal.texteditor"
+        minSdkVersion 9
         targetSdkVersion 16
     }
 
